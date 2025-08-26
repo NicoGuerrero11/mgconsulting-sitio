@@ -1,0 +1,11 @@
+---
+const { text, name, role } = Astro.props;
+import quoteIcon from "../../assets/icons/quote.svg";
+import "../../styles/global.css";
+---
+<div class="bg-white rounded-lg shadow p-6 max-w-sm space-y-4">
+  <img src={quoteIcon.src} alt="quote" class="w-6 h-6 mb-4 hidden md:block" />
+  <p class="text-black">{text}</p>
+  <p class="text-[var(--color-brand-blue] font-bold">{name}</p>
+  <p class="text-gray-500">{role}</p>
+</div>
