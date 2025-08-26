@@ -1,0 +1,10 @@
+---
+const { href = "#", label = "Botón" } = Astro.props;
+---
+
+<a
+  href={href}
+  class="inline-block bg-[var(--color-brand-green)] text-white font-medium px-6 py-2 rounded-md hover:bg-[var(--color-brand-green-hover)] transition-colors duration-200 shadow-md"
+>
+  {label}
+</a>
