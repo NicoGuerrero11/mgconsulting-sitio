@@ -1,14 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
 
 ---
 
-<Layout>
+<Layout title="Inicio - MG Consulting">
   <div class="p-8">
     <h1 class="text-4xl font-bold text-[var(--color-brand-blue)]">MG Consulting</h1>
 
-    <a class="inline-block mt-4 rounded-md px-5 py-2.5 text-white
-               bg-[var(--color-brand-green)] hover:bg-[var(--color-brand-green-hover)]">
-      Botón
-    </a>
+    <Button href="/contacto" label="Agendar una consulta" />
+    <Button href="/servicios" label="Ver servicios" />
 </Layout>
