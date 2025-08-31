@@ -1,11 +1,19 @@
 ---
-const { text, name, role } = Astro.props;
-import quoteIcon from "../../assets/icons/quote.svg";
-import "../../styles/global.css";
+import quotes from "../../assets/icons/comillas.svg";
+interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  class?: string; // opcional para que el padre pase widths/snap etc.
+}
+
+const { quote, author, role, class: className = "" } = Astro.props;
 ---
-<div class="bg-white rounded-lg shadow p-6 max-w-sm space-y-4">
-  <img src={quoteIcon.src} alt="quote" class="w-6 h-6 mb-4 hidden md:block" />
-  <p class="text-black">{text}</p>
-  <p class="text-[var(--color-brand-blue] font-bold">{name}</p>
-  <p class="text-gray-500">{role}</p>
-</div>
+
+<article class={`bg-white rounded-xl shadow-md p-5 md:p-6 ${className}`}>
+  <!-- Ícono de comillas -->
+  <img src={quotes.src} alt="" class="h-6 w-6 text-blue" aria-hidden="true" />
+  <p class="mt-3 text-text leading-relaxed italic">“{quote}”</p>
+  <p class="mt-4 font-semibold text-blue">{author}</p>
+  <p class="text-muted text-sm">{role}</p>
+</article>
