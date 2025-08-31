@@ -8,6 +8,9 @@
   --color-blue: #003B75;
   --color-green: #328172;
   --color-green-hover: #0b7663;
+  --color-hero-bg: #f3f7fc; /* cyan-50-ish */
+  --bg-grey: #FAFAFBFF; /* gray-50-ish */
+  --bg-white: #FFFFFF; /* blanco puro */
 
   /* Neutros útiles */
   --color-text: #0f172a;      /* slate-900-ish */
@@ -120,3 +123,12 @@ html, body {
 
 /* Panel de fondo claro (secciones) */
 .bg-panel { background: var(--color-panel); }
+
+/* Ocultar scrollbars cross-browser */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
