@@ -1,13 +1,11 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
-import Button from '../components/ui/Button.astro';
-
+import Base from '../layouts/BaseLayout.astro';
+import Hero from "../components/home/Hero.astro";
+import Testimonial from "../components/home/Testimonial.astro";
 ---
-
-<Layout title="Inicio - MG Consulting">
-  <div class="p-8">
-    <h1 class="text-4xl font-bold text-[var(--color-brand-blue)]">MG Consulting</h1>
-
-    <Button href="/contacto" label="Agendar una consulta" />
-    <Button href="/servicios" label="Ver servicios" />
-</Layout>
+<Base title="Inicio - MG Consulting">
+    <!-- HERO -->
+    <Hero />
+    <!-- TESTIMONIOS -->
+    <Testimonial />
+</Base>
