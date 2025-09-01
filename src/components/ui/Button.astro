@@ -1,0 +1,12 @@
+---
+const { label, href = "#", variant = "primary", full = false, class: extraClass = "" } = Astro.props;
+const baseClass = variant === "primary" ? "btn-primary" : "btn-secondary";
+const widthClass = full ? "w-full" : "";
+---
+
+<a
+  href={href}
+  class={`${baseClass} ${widthClass} ${extraClass}`}
+>
+  {label}
+</a>

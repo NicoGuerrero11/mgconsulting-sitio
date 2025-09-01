@@ -1,10 +1,134 @@
 @import "tailwindcss";
 
-
+/* ================================
+   THEME (Tailwind v4 tokens)
+================================ */
 @theme {
-  --color-brand-blue: #003B75;
-  --color-brand-green: #328172;
-  --color-brand-green-hover: #0b7663;
+  /* Colores de marca */
+  --color-blue: #003B75;
+  --color-green: #328172;
+  --color-green-hover: #0b7663;
+  --color-hero-bg: #f3f7fc; /* cyan-50-ish */
+  --bg-grey: #FAFAFBFF; /* gray-50-ish */
+  --bg-white: #FFFFFF; /* blanco puro */
 
-  --max-w-content: 72rem; /* 1152px */
+  /* Neutros útiles */
+  --color-text: #0f172a;      /* slate-900-ish */
+  --color-muted: #6b7280;     /* gray-500-ish */
+  --color-panel: #f9fafb;     /* fondo claro (footer) */
+  --color-border: #e5e7eb;    /* gris borde */
+
+  /* Fuentes */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Breakpoints (rem = accesible a preferencia de usuario) */
+  --breakpoint-sm: 40rem;   /* 640px */
+  --breakpoint-md: 48rem;   /* 768px */
+  --breakpoint-lg: 64rem;   /* 1024px */
+  --breakpoint-xl: 80rem;   /* 1280px */
+  --breakpoint-2xl: 96rem;  /* 1536px */
+  /* Extra opcional si usas monitores grandes */
+  --breakpoint-3xl: 120rem; /* 1920px */
+
+  /* Anchuras de contenedor “centrales” (para helpers propios) */
+  --max-w-content: 72rem;     /* 1152px */
+  --max-w-content-xl: 76.125rem; /* 1218px (1440 - 2*111) */
+
+  /* Radii & sombras útiles */
+  --radius-card: 0.75rem;  /* 12px */
+  --shadow-soft: 0px 8.5px 13.75px #171a1f38, 0px 0px 2px #171a1f14;;
+}
+
+/* ================================
+   BASE
+================================ */
+
+
+html, body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: #fff;
+}
+
+/* ================================
+   UTILIDADES PERSONALIZADAS
+   (reducen repetición en componentes)
+================================ */
+
+/* Enlaces del footer: hover centralizado */
+.footer-nav a {
+  transition: color .2s ease-in-out;
+}
+.footer-nav a:hover {
+  color: var(--color-blue);
+}
+
+/* Botón primario (si quieres reutilizarlo sin reescribir clases) */
+.btn-primary {
+  background: var(--color-green);
+  color: white;
+  padding: 0.75rem 1.25rem;          /* 12px 20px */
+  border-radius: 0.37rem;            /* 6px */
+  box-shadow: var(--shadow-soft);
+  transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+.btn-primary:hover {
+  background: var(--color-green-hover);
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: #fff;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.875rem;   /* 14px */
+  line-height: 1.375rem; /* 22px */
+  padding: 0.75rem 1.25rem;   /* 12px 20px */
+  border-radius: 0.375rem;    /* 6px */
+  border: 1px solid #fff;
+  box-shadow: var(--shadow-soft);
+  transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background: #fff;
+  border-color: #e5e7eb; /* gris claro */
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-secondary:active {
+  background: #fff;
+  border-color: #e5e7eb; /* gris claro */
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.4;
+}
+
+
+/* Card base (para servicios/testimonios) */
+.card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem; /* 24px */
+  border: 1px solid var(--color-border);
+}
+
+/* Texto secundarios genéricos */
+.text-muted { color: var(--color-muted); }
+
+/* Panel de fondo claro (secciones) */
+.bg-panel { background: var(--color-panel); }
+
+/* Ocultar scrollbars cross-browser */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

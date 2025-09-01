@@ -1,0 +1,70 @@
+---
+import Base from "../../layouts/BaseLayout.astro";
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+import heroimg from "../../assets/img/hero/hero-prueba.png";
+---
+
+<!-- HERO -->
+<section
+  class="relative mx-[calc(50%-50vw)] w-screen
+        min-h-[80vh] md:min-h-[820px] lg:min-h-[900px]
+        bg-[var(--color-hero-bg)] -mt-8 md:-mt-12 flex items-center"
+>
+  <Container class="py-10 md:py-12 lg:py-0 w-full">
+    <div
+      class="grid md:grid-cols-2 items-center
+            gap-8 md:gap-10 lg:gap-12"
+    >
+      <!-- COLUMNA IMAGEN (arriba en mobile, derecha en desktop) -->
+      <div class="order-1 md:order-2 flex justify-center md:justify-end">
+        <div
+          class="overflow-hidden shadow-lg
+                rounded-md md:rounded-lg
+                w-[310px] h-[192px]
+                md:w-[460px] md:h-[300px]
+                lg:w-[544px] lg:h-[389px]"
+        >
+          <img
+            src={heroimg.src}
+            alt="Consultoría estratégica: dashboard y análisis"
+            class="w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- COLUMNA TEXTO -->
+      <div class="order-2 md:order-1 text-center md:text-left">
+        <h1
+          class="font-extrabold text-blue
+                   text-[clamp(28px,6vw,40px)]
+                   md:text-[44px] md:leading-[54px]
+                   lg:text-[56px] lg:leading-[60px]"
+        >
+          Donde las personas crecen y tu empresa se transforma
+        </h1>
+
+        <!-- Botones: stacked en mobile, fila en md+; full width en mobile -->
+        <div
+          class="mt-6 flex flex-col md:flex-row gap-3 md:gap-4 w-full md:w-auto"
+        >
+          <Button
+            href="/contacto"
+            label="Agendar consulta"
+            variant="primary"
+            class="w-full md:w-auto"
+          />
+          <Button
+            href="/servicios"
+            label="Ver servicios"
+            variant="secondary"
+            class="w-full md:w-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
