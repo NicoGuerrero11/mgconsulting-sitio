@@ -1,0 +1,11 @@
+---
+// Desactiva generación mientras no hay contenido
+export const prerender = true;
+
+export async function getStaticPaths() {
+  // No hay páginas que generar por ahora
+  return [];
+}
+---
+
+<!-- Opcional: puedes renderizar un 404 o nada -->
