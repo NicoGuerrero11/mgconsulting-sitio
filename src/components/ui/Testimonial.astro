@@ -12,7 +12,12 @@ const { quote, author, role, class: className = "" } = Astro.props;
 
 <article class={`bg-white rounded-xl shadow-md p-5 md:p-6 ${className}`}>
   <!-- Ícono de comillas -->
-  <img src={quotes.src} alt="" class="h-6 w-6 text-blue" aria-hidden="true" />
+  <img
+    src={quotes.src}
+    alt="quotes assets"
+    class="h-6 w-6"
+    aria-hidden="true"
+  />
   <p class="mt-3 text-text leading-relaxed italic">“{quote}”</p>
   <p class="mt-4 font-semibold text-blue">{author}</p>
   <p class="text-muted text-sm">{role}</p>
