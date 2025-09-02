@@ -5,7 +5,7 @@ import logoDesktop from "../../assets/img/logo/logo-desktop.png";
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-panel md:bg-[#f5f5f5]">
+<footer class="bg-[var(--color-panel)]">
   <Container>
     <!-- logo + menú -->
     <div
@@ -18,7 +18,8 @@ const year = new Date().getFullYear();
           src={logoMobile.src}
           alt="MG Consulting"
           class="md:hidden h-[38px] w-auto mt-2 mx-auto"
-          width="61" height="42"
+          width="61"
+          height="42"
           loading="lazy"
         />
         <!-- Desktop -->
@@ -26,7 +27,8 @@ const year = new Date().getFullYear();
           src={logoDesktop.src}
           alt="MG Consulting"
           class="hidden md:block h-[77px] w-auto"
-          width="319" height="77"
+          width="319"
+          height="77"
           loading="lazy"
         />
       </a>
@@ -36,19 +38,23 @@ const year = new Date().getFullYear();
         <ul
           class="footer-nav hidden md:flex justify-end gap-1 lg:gap-2 text-[14px] leading-[22px] font-normal text-text"
         >
-          <li><a href="/" class="px-3 font-semibold md:font-normal">Inicio</a></li>
+          <li>
+            <a href="/" class="px-3 font-semibold md:font-normal">Inicio</a>
+          </li>
           <li><a href="/blog" class="px-3">Blog</a></li>
           <li><a href="/servicios" class="px-3">Servicios</a></li>
           <li><a href="/nosotros" class="px-3">Nosotros</a></li>
         </ul>
 
         <!-- Menú mobile (centrado bajo el logo) -->
-        <ul class="footer-nav md:hidden flex flex-col items-center mt-3 space-y-3 text-text text-[14px] leading-5">
-          <li><a href="/" >Inicio</a></li>
-          <li><a href="/servicios" >Servicios</a></li>
-          <li><a href="/nosotros" >Nosotros</a></li>
-          <li><a href="/blog" >Blog</a></li>
-          <li><a href="/contacto" >Contacto</a></li>
+        <ul
+          class="footer-nav md:hidden flex flex-col items-center mt-3 space-y-3 text-text text-[14px] leading-5"
+        >
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/servicios">Servicios</a></li>
+          <li><a href="/nosotros">Nosotros</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -57,8 +63,12 @@ const year = new Date().getFullYear();
     <hr class="border-t border-[#E5E7EB]" />
 
     <!-- Fila inferior: copyright (puede envolver) -->
-    <div class="flex items-center justify-center md:justify-between gap-3 py-2 flex-wrap">
-      <p class="text-center md:text-left text-[11px] leading-[17px] md:text-[14px] md:leading-[20px] font-normal text-muted">
+    <div
+      class="flex items-center justify-center md:justify-between gap-3 py-2 flex-wrap"
+    >
+      <p
+        class="text-center md:text-left text-[11px] leading-[17px] md:text-[14px] md:leading-[20px] font-normal text-muted"
+      >
         © {year} Managing &amp; Growth. Todos los derechos reservados.
       </p>
       <!-- espacio para redes  -->
