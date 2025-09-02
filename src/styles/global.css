@@ -15,7 +15,7 @@
   /* Neutros útiles */
   --color-text: #0f172a;      /* slate-900-ish */
   --color-muted: #6b7280;     /* gray-500-ish */
-  --color-panel: #f9fafb;     /* fondo claro (footer) */
+  --color-panel: #F5F5F5FF;     /* fondo claro (footer) */
   --color-border: #e5e7eb;    /* gris borde */
 
   /* Fuentes */
@@ -44,7 +44,7 @@
 /* ================================
    BASE
 ================================ */
-
+html { scroll-behavior: smooth; }
 
 html, body {
   font-family: var(--font-sans);
