@@ -1,0 +1,62 @@
+---
+const {
+  title,
+  image,
+  ctaText = "Agendar una consulta",
+  imageSide = "left",
+  bgColor = "",
+} = Astro.props;
+const reverse = imageSide === "right";
+import Button from "../ui/Button.astro";
+---
+
+<article
+  class={`relative mx-[calc(50%-50vw)] w-screen ${bgColor} min-h-[800px] flex items-center`}
+>
+  <!-- Inner container to center content and restore horizontal padding on mobile -->
+  <div
+    class="mx-auto max-w-6xl px-5 sm:px-6 md:px-8 pb-10 pt-5 md:pt-0 md:pb-0"
+  >
+    <!-- Title on its own row, centered -->
+    <h3
+      class="text-2xl md:text-4xl font-semibold text-text text-center md:mb-20"
+    >
+      {title}
+    </h3>
+
+    <!-- Two-column grid on desktop, stacked on mobile -->
+    <div class="mt-8 grid gap-8 md:gap-12 md:grid-cols-2 md:items-center">
+      {
+        image && (
+          <div class={`${reverse ? "md:order-2" : "md:order-1"}`}>
+            <img
+              src={image}
+              alt={title}
+              class="w-full h-auto rounded-lg shadow"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )
+      }
+
+      <div class={`${reverse ? "md:order-1" : "md:order-2"}`}>
+        <div
+          class="prose prose-neutral max-w-none text-muted text-justify md:text-left text-base md:text-lg"
+        >
+          <slot name="content" />
+        </div>
+        <div
+          class="mt-6 flex flex-col md:flex-row gap-3 md:gap-4 w-full md:w-auto justify-start md:justify-start items-start text-center"
+        >
+          <Button
+            href="/contacto"
+            label={ctaText}
+            variant="primary"
+            class="w-full md:w-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

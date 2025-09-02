@@ -17,11 +17,13 @@ const nav = [
 const isActive = (path: string) => Astro.url.pathname === path;
 ---
 
-<header class="h-[64px] md:h-[90px] bg-white/95 backdrop-blur-sm shadow-sm">
+<header
+  class="md:sticky top-0 z-50 h-[64px] md:h-[90px] bg-white/95 backdrop-blur-sm shadow-md"
+>
   <Container>
     <!-- Contenedor para centrar el título en mobile -->
     <div class="relative flex h-full w-full items-center justify-between">
-        <!-- IZQUIERDA: Logo (61x46 en mobile, 319x77 en desktop) -->
+      <!-- IZQUIERDA: Logo (61x46 en mobile, 319x77 en desktop) -->
       <div class="flex-shrink-0 w-auto pl-4">
         <a href="/" class="block">
           <!-- Logo mobile: 61x46 -->
@@ -29,39 +31,45 @@ const isActive = (path: string) => Astro.url.pathname === path;
             src={logoMobile.src}
             alt="MG Consulting"
             class="block md:hidden w-[61px] h-[46px] object-fill"
-            width="61" height="46"
+            width="61"
+            height="46"
           />
           <!-- Logo desktop: 400x87 -->
           <img
             src={logoDesktop.src}
             alt="MG Consulting"
             class="hidden md:block w-[319px] h-[87px] object-cover"
-            width="319" height="87"
+            width="319"
+            height="87"
           />
         </a>
       </div>
 
       <!-- CENTRO: Nav en desktop (364x22 aprox) / Título en mobile -->
       <!-- Título mobile centrado absolutamente para que quede PERFECTO -->
-      {mobileTitle && (
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-[28px] leading-none font-semibold text-[var(--color-brand-blue)] truncate max-w-[60%] text-center">
-          {mobileTitle}
-        </div>
-      )}
+      {
+        mobileTitle && (
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-lg leading-none font-semibold text-[var(--color-blue)] truncate max-w-[60%] text-center">
+            {mobileTitle}
+          </div>
+        )
+      }
 
       <nav class="hidden md:flex flex-1 justify-center items-center gap-8">
-        {nav.map((item) => (
-          <a
-            href={item.href}
-            class={`text-slate-700 hover:text-[var(--color-brand-blue)] transition ${
-              isActive(item.href)
-                ? "text-[var(--color-brand-blue)] font-semibold"
-                : ""
-            }`}
-          >
-            {item.label}
-          </a>
-        ))}
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class={`text-slate-700 hover:text-[var(--color-brand-blue)] transition ${
+                isActive(item.href)
+                  ? "text-[var(--color-brand-blue)] font-semibold"
+                  : ""
+              }`}
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- DERECHA: CTA en desktop (213x40 aprox) / Hamburguesa en mobile (40x40) -->
@@ -74,8 +82,16 @@ const isActive = (path: string) => Astro.url.pathname === path;
         aria-label="Abrir menú"
       >
         <!-- Ícono hamburguesa (24x24 dentro del botón 40x40) -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[var(--color-brand-blue)]">
-          <path fill-rule="evenodd" d="M3.75 6.75A.75.75 0 014.5 6h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-[var(--color-brand-blue)]"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3.75 6.75A.75.75 0 014.5 6h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
+            clip-rule="evenodd"></path>
         </svg>
       </button>
     </div>
