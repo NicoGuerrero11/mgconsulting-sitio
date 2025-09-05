@@ -1,14 +1,68 @@
 ---
-interface Props {
+interface ValueItem {
   title: string;
   description: string;
+  icon: ImageMetadata;
 }
-const { title, description } = Astro.props;
+
+interface Props {
+  /** Lista completa de valores a renderizar */
+  items: ValueItem[];
+  /** Ruta (string) al mismo ícono SVG para todos los ítems. Puede ser de `public/` (ej: "/icons/value.svg"). */
+  iconPath?: string;
+  /** Cuántos mostrar en mobile (< md). Por defecto 4. */
+  maxMobile?: number;
+  /** Clases extra para el contenedor raíz */
+  class?: string;
+}
+
+const { items = [], maxMobile = 4, class: cls = "" } = Astro.props as Props;
+
+const head = items.slice(0, maxMobile);
 ---
 
-<div
-  class="relative top-[200px] left-[36px] w-[320px] h-[242px] bg-white rounded-[10px] shadow-sm p-4"
->
-  <h3 class="font-semibold text-xl text-text">{title}</h3>
-  <p class="mt-2 text-base text-muted">{description}</p>
-</div>
+<section class={`w-full ${cls}`}>
+  <!-- Mobile: lista simple con los primeros N valores -->
+  <div class="md:hidden space-y-4">
+    {
+      head.map((v) => (
+        <div class="flex items-start gap-3">
+          <img
+            src={v.icon.src}
+            alt="icono de check"
+            class="mt-1 h-6 w-6 shrink-0"
+            loading="lazy"
+          />
+
+          <div>
+            <p class="font-semibold text-base text-text">{v.title}</p>
+            <p class="mt-1 text-sm text-muted leading-relaxed">
+              {v.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Desktop: grid de cards con TODOS los valores -->
+  <div class="hidden md:grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:pt-10">
+    {
+      items.map((v) => (
+        <article class="rounded-2xl bg-white p-6 shadow-sm text-center">
+          <img
+            src={v.icon.src}
+            alt={v.title}
+            class="h-8 w-8 mb-3 mx-auto"
+            loading="lazy"
+          />
+
+          <h3 class="font-semibold text-lg md:text-xl text-text">{v.title}</h3>
+          <p class="mt-2 md:text-base text-muted leading-relaxed">
+            {v.description}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>
