@@ -1,0 +1,46 @@
+---
+import Container from "../ui/Container.astro";
+import { Picture } from "astro:assets";
+import misionImage from "../../assets/img/nosotros/mision.png";
+---
+
+<article
+  class="hidden md:block relative mx-[calc(50%-50vw)] bg-[var(--bg-grey)] pt-20 pb-10 mb-0 min-h-[700px] [content-visibility:auto] [contain-intrinsic-size:700px]"
+>
+  <Container class="w-full px-6">
+    <div class="grid grid-cols-2 gap-4 items-center text-left">
+      <div class="max-w-[520px] w-full">
+        <h2 class="text-4xl font-bold">Nuestra Misión</h2>
+        <p class="text-lg font-normal mt-2 text-muted text-justify">
+          Nuestra misión es ser el socio estratégico de confianza que impulse a
+          las empresas a superar sus desafíos, optimizar su rendimiento y
+          alcanzar un crecimiento sostenible en un mundo en constante cambio.
+          Logramos esto a través de consultoría experta, soluciones innovadoras
+          y un compromiso inquebrantable con el éxito de nuestros clientes.
+        </p>
+        <h3 class="text-4xl font-bold mt-10">Nuestra Visión</h3>
+        <p class="text-lg font-normal mt-2 text-muted text-justify">
+          Aspiramos a ser la consultora líder a nivel global, reconocida por
+          nuestra excelencia, ética y el impacto transformador que generamos en
+          cada organización que servimos. Buscamos establecer nuevos estándares
+          en el asesoramiento empresarial, anticipando tendencias y creando
+          valor duradero.
+        </p>
+      </div>
+      <div class="w-full max-w-[520px] flex justify-center">
+        <div class="aspect-[3/2] w-full overflow-hidden rounded-3xl">
+          <Picture
+            src={misionImage}
+            alt={"imagen vision de la compañia"}
+            widths={[480, 640, 768, 960]}
+            sizes="(min-width: 1024px) 480px, 90vw"
+            formats={["avif", "webp", "png"]}
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </Container>
+</article>
