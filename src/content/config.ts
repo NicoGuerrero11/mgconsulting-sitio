@@ -21,7 +21,7 @@ const values = defineCollection({
     schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string(),
-        icon: image().optional(),                        // opcional (svg/png)
+        icon: image(),                        // opcional (svg/png)
         order: z.number().default(0),
     }),
 });
