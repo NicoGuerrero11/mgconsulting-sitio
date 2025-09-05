@@ -15,4 +15,17 @@ const services = defineCollection({
     }),
 });
 
-export const collections = { services };
+// Valores (uno por archivo)
+const values = defineCollection({
+    type: "content",
+    schema: ({ image }) => z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: image().optional(),                        // opcional (svg/png)
+        order: z.number().default(0),
+    }),
+});
+
+
+
+export const collections = { services, values };
