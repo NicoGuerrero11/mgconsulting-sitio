@@ -1,0 +1,34 @@
+---
+import Container from "../ui/Container.astro";
+import FounderCard from "./FounderCard.astro";
+import fotoFundador from "../../assets/img/nosotros/fundador.jpeg";
+
+const founder = {
+  name: "Marcelo Guerrero",
+  role: "Fundador y CEO",
+  bio: "Con más de 20 años de experiencia en consultoría estratégica y gestión empresarial, Marcelo Guerrero es el cerebro detrás de Managing & Growth. Su enfoque innovador y su profundo conocimiento de diversas industrias han sido fundamentales para transformar y revitalizar innumerables empresas. Es un apasionado de la creación de estrategias sostenibles que no solo impulsan el crecimiento financiero, sino que también fomentan un impacto positivo en la sociedad.",
+};
+---
+
+<section
+  class="mx-[calc(50%-50vw)] bg-[var(--bg-grey)] md:bg-[var(--bg-white)] pt-10 md:pt-14 pb-10 mb-0"
+>
+  <Container class="w-full px-6 md:px-8">
+    <!-- Mobile -->
+    <div class="block md:hidden text-center">
+      <h2 class="text-text font-bold text-3xl mb-4 pt-0 pb-0">
+        El origen de nuestra visión
+      </h2>
+      <p class="text-muted font-normal text-base mb-8">
+        Visión y liderazgo que inspiran.
+      </p>
+    </div>
+    <FounderCard
+      name={founder.name}
+      role={founder.role}
+      photo={fotoFundador}
+      bio={founder.bio}
+      class="max-w-3xl mx-auto"
+    />
+  </Container>
+</section>
