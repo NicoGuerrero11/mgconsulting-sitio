@@ -2,9 +2,19 @@
 import Layout from "../layouts/BaseLayout.astro";
 import About from "../components/about/About.astro";
 import Fundador from "../components/about/Fundador.astro";
+import Value from "../components/about/Value.astro";
+import Mision from "../components/about/Mision.astro";
+import NosotrosCard from "../components/home/Nosotros.astro";
 ---
 
 <Layout title="Nosotros - Managing & Growth" mobileTitle="Nosotros">
   <About />
+  <Mision />
   <Fundador />
+  <Value />
+  <NosotrosCard
+    title="¿Listo para impulsar tu empresa?"
+    href="/contacto"
+    label="Contáctanos"
+  />
 </Layout>
