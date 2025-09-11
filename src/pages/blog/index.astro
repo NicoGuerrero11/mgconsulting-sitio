@@ -1,7 +1,80 @@
 ---
-import Layout from '../../layouts/BaseLayout.astro';
+import { sanity } from "../../lib/sanity";
+import { postsQuery } from "../../lib/queries";
+import Layout from "../../layouts/BaseLayout.astro";
+// Tipado de los posts que vienen de Sanity
+type Post = {
+  title: string;
+  slug: string;
+  pubDate: string; // ISO date string
+  author?: string;
+  image?: string;
+  excerpt?: string;
+  tags?: string[];
+};
+const posts: Post[] = await sanity.fetch<Post[]>(postsQuery);
 ---
 
-<Layout title="blog - MG Consulting" mobileTitle="Blog">
-  <h1 class="text-3xl font-bold text-[var(--color-brand-blue)]">Blog</h1>
+<Layout title="Blog" mobileTitle="Blog">
+  <section class="mx-auto max-w-6xl px-4 py-0 md:py-10">
+    <div class="hidden md:block">
+      <h1 class="text-5xl font-bold mb-8 text-center text-[var(--color-blue)]">
+        Perspectivas y Estrategias para el Éxito Empresarial
+      </h1>
+      <p class="text-center text-xl text-muted mb-12">
+        Sumérgete en nuestro blog para encontrar análisis profundos, consejos
+        prácticos y las últimas tendencias que impulsarán el crecimiento y la
+        innovación en tu negocio.
+      </p>
+    </div>
+
+    {
+      posts.length === 0 ? (
+        <p class="text-sm text-muted">Aún no hay publicaciones.</p>
+      ) : (
+        <div class="grid gap-8 md:gap-18 sm:grid-cols-2 lg:grid-cols-3 bg-[var(--bg-grey)] md:p-12">
+          {posts.map((p: Post) => (
+            <article
+              class="flex h-full flex-col bg-white p-5 transition hover:shadow-md rounded-[10px] min-h-[457px] min-w-[320px]"
+              style="box-shadow: 0px 0px 1px #171a1f0D, 0px 0px 2px #171a1f14;"
+            >
+              <a href={`/blog/${p.slug}`} class="block">
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    class="w-full h-48 rounded-t-[10px] object-cover object-center"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-48 rounded-t-[10px]  bg-neutral-50" />
+                )}
+              </a>
+
+              <div class="flex flex-col flex-1 px-2 pt-2 mb-4">
+                <h3 class="text-[1.125rem] font-semibold leading-snug mb-3 text-center mt-4">
+                  <a href={`/blog/${p.slug}`} class="hover:underline">
+                    {p.title}
+                  </a>
+                </h3>
+
+                {p.excerpt && (
+                  <p class="text-sm text-muted mb-5">{p.excerpt}</p>
+                )}
+
+                <div class="mt-auto">
+                  <a
+                    href={`/blog/${p.slug}`}
+                    class="inline-flex items-center rounded-md bg-white px-3 py-1.5 text-sm font-medium shadow-sm ring-1 ring-inset ring-neutral-200 hover:bg-neutral-50"
+                  >
+                    Leer más
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
 </Layout>

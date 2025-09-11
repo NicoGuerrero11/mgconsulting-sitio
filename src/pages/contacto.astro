@@ -1,7 +1,21 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
+import Layout from "../layouts/BaseLayout.astro";
+import ContactIntro from "../components/contact/ContactIntro.astro";
+import ContactForm from "../components/contact/ContactForm.astro";
+import ContactDetails from "../components/contact/ContactDetails.astro";
 ---
 
-<Layout title="Contacto - MG Consulting" mobileTitle="Contacto">
-  <h1 class="text-3xl font-bold text-[var(--color-brand-blue)]">Contacto</h1>
+<Layout title="Contacto — MG Consulting" mobileTitle="Contacto">
+  <ContactIntro />
+  <section class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 md:mb-20">
+    <article class="bg-white rounded-2xl shadow p-6">
+      <h2 class="text-lg font-semibold mb-4">Envíanos un mensaje</h2>
+      <ContactForm />
+    </article>
+
+    <aside class="bg-white rounded-2xl shadow p-4">
+      <h2 class="text-lg font-semibold mb-4">Información de contacto</h2>
+      <ContactDetails />
+    </aside>
+  </section>
 </Layout>
