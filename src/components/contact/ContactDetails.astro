@@ -1,0 +1,42 @@
+---
+const {
+  phone = "+52 55 3996 5275",
+  email = "marcelo@mgconsultings.com",
+  hours = "Lunes a Viernes · 9:00 - 18:00",
+  whatsapp = "https://wa.me/5539965275",
+} = Astro.props;
+import contacto from "../../assets/img/contacto/contacto.png";
+---
+
+<div class="space-y-4">
+  <ul class="space-y-2 text-sm text-muted">
+    <li>📞 {phone}</li>
+    <li>
+      ✉️ <a
+        href={`mailto:${email}`}
+        class="underline text-[var(--color-brand-blue)]">{email}</a
+      >
+    </li>
+    <li>🕘 {hours}</li>
+    {
+      whatsapp && (
+        <li>
+          💬{" "}
+          <a
+            href={whatsapp}
+            rel="noopener"
+            target="_blank"
+            class="underline text-[var(--color-brand-blue)]"
+          >
+            WhatsApp
+          </a>
+        </li>
+      )
+    }
+  </ul>
+
+  <p class="text-xs text-gray-500">
+    Tu información se trata de forma confidencial.
+  </p>
+  <img src={contacto.src} alt="imagen de contacto" class="rounded-4xl mt-20" />
+</div>
