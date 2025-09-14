@@ -1,10 +1,48 @@
 import vercel from '@astrojs/vercel';
 import { defineConfig } from 'astro/config'
 import tailwind from '@tailwindcss/vite'
+import sitemap from '@astrojs/sitemap';
 
 
 export default defineConfig({
-  integrations: [],
+  integrations: [
+    sitemap({
+      // Personalizar URLs si es necesario
+      customPages: [
+        // Agregar páginas adicionales que no estén en /pages
+        // 'https://tudominio.com/pagina-especial'
+      ],
+      // Filtrar páginas que no quieres en el sitemap
+      filter: (page) => {
+        // Excluir páginas de agradecimiento o privadas
+        return !page.includes('/gracias') && !page.includes('/admin');
+      },
+      // Configurar changefreq y priority
+      serialize(item) {
+        // Páginas principales con mayor prioridad
+        if (item.url === process.env.PUBLIC_SITE_URL + '/' || item.url.includes('/index')) {
+          item.priority = 1.0;
+          item.changefreq = 'weekly';
+        }
+        // Blog posts con prioridad media
+        else if (item.url.includes('/blog/')) {
+          item.priority = 0.8;
+          item.changefreq = 'monthly';
+        }
+        // Páginas de servicios importantes
+        else if (item.url.includes('/servicios') || item.url.includes('/contacto')) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
+        }
+        // Otras páginas
+        else {
+          item.priority = 0.7;
+          item.changefreq = 'monthly';
+        }
+        return item;
+      }
+    })
+  ],
   vite: {
     plugins: [tailwind()],
   },
