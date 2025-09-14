@@ -6,30 +6,30 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "studio": "sanity dev",
-    "studio:build": "sanity build",
-    "studio:deploy": "sanity deploy"
+    "astro": "astro"
   },
   "dependencies": {
-    "@portabletext/to-html": "^3.0.0",
+    "@astrojs/react": "^4.3.1",
     "@resvg/resvg-js": "^2.6.2",
-    "@sanity/client": "^7.11.1",
-    "@sanity/vision": "^4.8.1",
-    "astro": "^5.13.3",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "astro": "^5.13.7",
     "autoprefixer": "^10.4.21",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
     "postcss": "^8.5.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-is": "^19.1.1",
     "resend": "^6.0.3",
     "satori": "^0.18.2",
+    "sharp": "^0.34.3",
     "styled-components": "^6.1.19",
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@astrojs/vercel": "^8.2.7",
+    "@astrojs/vercel": "^8.0.4",
     "@tailwindcss/vite": "^4.1.12",
-    "sanity": "^4.8.1",
     "tailwindcss": "^4.1.12"
   }
 }
