@@ -9,7 +9,12 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Layout title="Blog" mobileTitle="Blog">
+<Layout 
+  title="Blog - Estrategias Empresariales y Consejos de Liderazgo | MG Consulting"
+  description="Descubre las últimas tendencias en consultoría empresarial, estrategias de crecimiento, liderazgo ejecutivo y transformación organizacional. Artículos expertos de MG Consulting."
+  mobileTitle="Blog"
+  image="/og-blog.jpg"
+>
   <section class="mx-auto max-w-6xl px-4 py-10">
     <div class="hidden md:block mb-20">
       <h1 class="text-5xl font-bold mb-8 text-center text-[var(--color-blue)]">

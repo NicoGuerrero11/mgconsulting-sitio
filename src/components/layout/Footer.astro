@@ -1,5 +1,6 @@
 ---
 import Container from "../ui/Container.astro";
+import { Picture } from "astro:assets";
 import logoMobile from "../../assets/img/logo/logo-mobile.png";
 import logoDesktop from "../../assets/img/logo/logo-desktop.png";
 const year = new Date().getFullYear();
@@ -14,22 +15,24 @@ const year = new Date().getFullYear();
       <!-- Logo -->
       <a href="/" class="block order-1 mx-auto md:mx-0">
         <!-- Mobile -->
-        <img
-          src={logoMobile.src}
-          alt="MG Consulting"
+        <Picture
+          src={logoMobile}
+          alt="MG Consulting - Volver al inicio"
           class="md:hidden h-[38px] w-auto mt-2 mx-auto"
-          width="61"
-          height="42"
+          width={61}
+          height={42}
           loading="lazy"
+          format={["avif", "webp", "png"]}
         />
         <!-- Desktop -->
-        <img
-          src={logoDesktop.src}
-          alt="MG Consulting"
+        <Picture
+          src={logoDesktop}
+          alt="MG Consulting - Consultoría Estratégica - Volver al inicio"
           class="hidden md:block h-[77px] w-auto"
-          width="319"
-          height="77"
+          width={319}
+          height={77}
           loading="lazy"
+          format={["avif", "webp", "png"]}
         />
       </a>
 

@@ -1,6 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
+import { Picture } from "astro:assets";
 import heroimg from "../../assets/img/hero/hero-prueba.png";
 ---
 
@@ -24,13 +25,15 @@ import heroimg from "../../assets/img/hero/hero-prueba.png";
                 md:w-[460px] md:h-[300px]
                 lg:w-[544px] lg:h-[389px]"
         >
-          <img
-            src={heroimg.src}
-            alt="Consultoría estratégica: dashboard y análisis"
+          <Picture
+            src={heroimg}
+            alt="Consultoría estratégica: dashboard y análisis de datos para el crecimiento empresarial"
+            widths={[310, 460, 544, 800, 1200]}
+            sizes="(max-width: 768px) 310px, (max-width: 1024px) 460px, 544px"
             class="w-full h-full object-cover"
             loading="eager"
             fetchpriority="high"
-            class="w-full h-full object-cover"
+            format={["avif", "webp"]}
           />
         </div>
       </div>

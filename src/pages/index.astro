@@ -4,9 +4,17 @@ import Hero from "../components/home/Hero.astro";
 import Testimonial from "../components/home/Testimonial.astro";
 import Services from "../components/home/Services.astro";
 import Nosotros from "../components/home/Nosotros.astro";
+import Schema from "../components/seo/Schema.astro";
 ---
 
-<Base title="Home - MG Consulting">
+<Base 
+  title="MG Consulting - Consultoría Estratégica para el Crecimiento Empresarial"
+  description="Transformamos empresas con consultoría estratégica especializada. Liderazgo ejecutivo, crecimiento sostenible y gestión del cambio. Impulsa tu negocio al siguiente nivel con MG Consulting."
+  image="/og-home.jpg"
+>
+  <!-- Schema markup para la homepage -->
+  <Schema slot="head" type="Organization" />
+  <Schema slot="head" type="WebSite" />
   <!-- HERO -->
   <Hero />
   <!-- TESTIMONIOS -->
