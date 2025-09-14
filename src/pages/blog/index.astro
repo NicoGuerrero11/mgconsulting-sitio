@@ -1,27 +1,21 @@
 ---
-import { sanity } from "../../lib/sanity";
-import { postsQuery } from "../../lib/queries";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/BaseLayout.astro";
-// Tipado de los posts que vienen de Sanity
-type Post = {
-  title: string;
-  slug: string;
-  pubDate: string; // ISO date string
-  author?: string;
-  image?: string;
-  excerpt?: string;
-  tags?: string[];
-};
-const posts: Post[] = await sanity.fetch<Post[]>(postsQuery);
+import Button from "../../components/ui/Button.astro";
+import { Picture } from "astro:assets";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
 ---
 
 <Layout title="Blog" mobileTitle="Blog">
-  <section class="mx-auto max-w-6xl px-4 py-0 md:py-10">
-    <div class="hidden md:block">
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <div class="hidden md:block mb-20">
       <h1 class="text-5xl font-bold mb-8 text-center text-[var(--color-blue)]">
         Perspectivas y Estrategias para el Éxito Empresarial
       </h1>
-      <p class="text-center text-xl text-muted mb-12">
+      <p class="text-muted text-center">
         Sumérgete en nuestro blog para encontrar análisis profundos, consejos
         prácticos y las últimas tendencias que impulsarán el crecimiento y la
         innovación en tu negocio.
@@ -32,45 +26,44 @@ const posts: Post[] = await sanity.fetch<Post[]>(postsQuery);
       posts.length === 0 ? (
         <p class="text-sm text-muted">Aún no hay publicaciones.</p>
       ) : (
-        <div class="grid gap-8 md:gap-18 sm:grid-cols-2 lg:grid-cols-3 bg-[var(--bg-grey)] md:p-12">
-          {posts.map((p: Post) => (
+        <div class="grid grid-cols-1 gap-6 justify-center sm:grid-cols-2 lg:grid-cols-3 bg-[var(--bg-grey)] p-6 rounded-2xl">
+          {posts.map((p) => (
             <article
-              class="flex h-full flex-col bg-white p-5 transition hover:shadow-md rounded-[10px] min-h-[457px] min-w-[320px]"
-              style="box-shadow: 0px 0px 1px #171a1f0D, 0px 0px 2px #171a1f14;"
+              class="
+                /* Mobile: replica del diseño pedido */
+                w-[358px] max-w-full h-[457px] mx-auto rounded-[10px] bg-white p-6 
+                shadow-[0_0_1px_rgba(23,26,31,0.87),0_0_2px_rgba(23,26,31,0.08)]
+                transition
+                /* Desktop/Tablet: volver al layout normal */
+                sm:w-auto sm:h-auto sm:rounded-2xl  sm:shadow-none sm:hover:shadow sm:static
+              "
             >
-              <a href={`/blog/${p.slug}`} class="block">
-                {p.image ? (
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    class="w-full h-48 rounded-t-[10px] object-cover object-center"
+              {p.data.imagen ? (
+                <div class="mb-4 aspect-[16/9] w-full overflow-hidden rounded-xl bg-neutral-100">
+                  <Picture
+                    src={p.data.imagen}
+                    alt={p.data.title}
+                    widths={[400, 600, 800, 1200]}
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    class="h-full w-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
-                ) : (
-                  <div class="w-full h-48 rounded-t-[10px]  bg-neutral-50" />
-                )}
-              </a>
-
-              <div class="flex flex-col flex-1 px-2 pt-2 mb-4">
-                <h3 class="text-[1.125rem] font-semibold leading-snug mb-3 text-center mt-4">
-                  <a href={`/blog/${p.slug}`} class="hover:underline">
-                    {p.title}
-                  </a>
-                </h3>
-
-                {p.excerpt && (
-                  <p class="text-sm text-muted mb-5">{p.excerpt}</p>
-                )}
-
-                <div class="mt-auto">
-                  <a
-                    href={`/blog/${p.slug}`}
-                    class="inline-flex items-center rounded-md bg-white px-3 py-1.5 text-sm font-medium shadow-sm ring-1 ring-inset ring-neutral-200 hover:bg-neutral-50"
-                  >
-                    Leer más
-                  </a>
                 </div>
-              </div>
+              ) : (
+                <div class="mb-2 aspect-[16/9] w-full rounded-xl bg-neutral-100" />
+              )}
+
+              <h3 class="text-xl font-semibold mb-2">{p.data.title}</h3>
+              <p class="text-sm text-neutral-600 line-clamp-3 mb-8">
+                {p.data.description}
+              </p>
+              <Button
+                href={`/blog/${p.slug}/`}
+                label="Leer más"
+                variant="secondary"
+                class="block text-center sm:inline-flex w-full sm:items-center sm:justify-center sm:w-auto mt-6"
+              />
             </article>
           ))}
         </div>

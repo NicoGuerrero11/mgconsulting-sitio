@@ -1,31 +1,45 @@
 ---
-import { sanity } from "../../lib/sanity";
-import { postBySlugQuery } from "../../lib/queries";
-import { ptToHtml } from "../../lib/pt";
+import { getCollection, getEntryBySlug } from "astro:content";
 import Layout from "../../layouts/BaseLayout.astro";
-import Container from "../../components/ui/Container.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((p) => ({ params: { slug: p.slug } }));
+}
 
 const { slug } = Astro.params;
-const post = await sanity.fetch(postBySlugQuery, { slug });
-if (!post) throw new Error("Post no encontrado");
-const html = ptToHtml(post.body);
+if (!slug) throw new Error("Slug no encontrado");
+
+const post = await getEntryBySlug("blog", slug);
+if (!post) return Astro.redirect("/blog");
+
+const { Content } = await post.render();
+const { title, date, author, description } = post.data;
 ---
 
-<Layout title={post.title} description={post.title}>
-  <Container mx="auto" px="4" py="10">
-    <article class="mx-auto max-w-3xl px-4 py-10">
+<div class="bg-[#F9FAFB]">
+  <Layout title={title} description={description}>
+    <section class="mx-auto max-w-4xl px-20 py-10 rounded-xl shadow-md mb-9">
+      <!-- meta arriba a la izquierda -->
       <p class="text-sm text-muted mb-4">
-        {new Date(post.pubDate).toLocaleDateString()}
-        {post.author ? `• ${post.author}` : ""}
+        {date.toLocaleDateString()} · {author}
       </p>
 
+      <!-- título centrado -->
       <h1
-        class="text-4xl font-bold tracking-tight mb-12 text-center text-[var(--color-blue)]"
+        class="text-center text-[var(--color-blue)] text-4xl font-extrabold tracking-tight mb-12"
       >
-        {post.title}
+        {title}
       </h1>
 
-      <div class="post-content" set:html={html} />
-    </article>
-  </Container>
-</Layout>
+      <!-- sin imagen en el detalle (tal como pediste) -->
+
+      <!-- cuerpo -->
+      <article class="post-content">
+        <Content />
+      </article>
+    </section>
+  </Layout>
+</div>
