@@ -21,11 +21,22 @@ const values = defineCollection({
     schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string(),
-        icon: image(),                        // opcional (svg/png)
+        icon: image(),                        // opcional (svg/png/jpg)
         order: z.number().default(0),
     }),
 });
 
+// Blog
+const blog = defineCollection({
+    type: "content",
+    schema: ({ image }) => z.object({
+        title: z.string(),
+        description: z.string().min(10),
+        date: z.coerce.date(),
+        author: z.string().default("Equipo"),
+        imagen: image().optional()       // opcional (svg/png/jpg)
+    }),
+});
 
 
-export const collections = { services, values };
+export const collections = { services, values, blog };
