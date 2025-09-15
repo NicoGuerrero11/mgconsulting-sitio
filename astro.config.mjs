@@ -20,7 +20,7 @@ export default defineConfig({
       // Configurar changefreq y priority
       serialize(item) {
         // Páginas principales con mayor prioridad
-        if (item.url === process.env.PUBLIC_SITE_URL + '/' || item.url.includes('/index')) {
+        if (item.url === 'https://example.com/' || item.url.includes('/index')) { // Replace with your actual site URL
           item.priority = 1.0;
           item.changefreq = 'weekly';
         }
@@ -54,5 +54,5 @@ export default defineConfig({
   },
   output: 'server',
   adapter: vercel(),
-  site: process.env.PUBLIC_SITE_URL,
+  site: 'https://example.com', // Replace with your actual site URL
 })
