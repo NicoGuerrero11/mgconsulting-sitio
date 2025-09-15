@@ -50,7 +50,20 @@ export default defineConfig({
     // Configure built-in image service
     service: {
       entrypoint: 'astro/assets/services/sharp'
-    }
+    },
+    // Optimizaciones adicionales
+    domains: ['localhost'],
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: '**.mgconsultings.com'
+    }]
+  },
+  // Optimizaciones de build
+  build: {
+    // Inline small assets
+    inlineStylesheets: 'auto',
+    // Mejor tree shaking
+    split: true
   },
   output: 'server',
   adapter: vercel(),
