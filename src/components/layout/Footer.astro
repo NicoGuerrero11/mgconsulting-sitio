@@ -16,11 +16,11 @@ const year = new Date().getFullYear();
       <a href="/" class="block order-1 mx-auto md:mx-0">
         <!-- Mobile -->
         <Picture
-          src={logoMobile}
+          src={logoDesktop}
           alt="MG Consulting - Volver al inicio"
-          class="md:hidden h-[38px] w-auto mt-2 mx-auto"
-          width={61}
-          height={42}
+          class="md:hidden h-[120px] w-auto mx-auto"
+          width={480}
+          height={120}
           loading="lazy"
           format={["avif", "webp", "png"]}
           quality={90}
@@ -29,9 +29,9 @@ const year = new Date().getFullYear();
         <Picture
           src={logoDesktop}
           alt="MG Consulting - Consultoría Estratégica - Volver al inicio"
-          class="hidden md:block h-[77px] w-auto"
-          width={319}
-          height={77}
+          class="hidden md:block h-[100px] w-auto"
+          width={400}
+          height={100}
           loading="lazy"
           format={["avif", "webp", "png"]}
           quality={90}
@@ -53,7 +53,7 @@ const year = new Date().getFullYear();
 
         <!-- Menú mobile (centrado bajo el logo) -->
         <ul
-          class="footer-nav md:hidden flex flex-col items-center mt-3 space-y-3 text-text text-[14px] leading-5"
+          class="footer-nav md:hidden flex flex-col items-center -mt-2 space-y-2 text-text text-[14px] leading-5"
         >
           <li><a href="/">Inicio</a></li>
           <li><a href="/servicios">Servicios</a></li>
