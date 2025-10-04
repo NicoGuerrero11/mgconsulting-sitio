@@ -3,7 +3,11 @@ import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import { Picture } from "astro:assets";
 // import logoMobile from "../../assets/img/logo/logo-mobile.png";
-import logoMobile from "../../assets/img/logo/logo-mobile-alt.png";
+// import logoMobile from "../../assets/img/logo/logo-mobile-alt.png";
+// import logoMobile from "../../assets/img/logo/logo-mobile-hq.png";
+// import logoMobile from "../../assets/img/logo/logo-mobile-ultra.png";
+// Usar el logo desktop para mobile también (mejor calidad)
+import logoMobile from "../../assets/img/logo/logo-desktop.png";
 import logoDesktop from "../../assets/img/logo/logo-desktop.png";
 
 // Titulos mobile
@@ -27,18 +31,19 @@ const isActive = (path: string) => Astro.url.pathname === path;
     <!-- Contenedor para centrar el título en mobile -->
     <div class="relative flex h-full w-full items-center justify-between">
       <!-- IZQUIERDA: Logo (mejor proporción mobile, 319x77 en desktop) -->
-      <div class="flex-shrink-0 w-auto pl-4 pt-2 md:pt-0">
-        <a href="/" class="block">
+      <div class="flex-shrink-0 w-auto pl-3 py-2 md:pt-0 md:py-0">
+        <a href="/" class="block header-logo">
           <!-- Logo mobile: mejoramos proporción y tamaño -->
           <Picture
             src={logoMobile}
             alt="MG Consulting - Consultoría Estratégica"
-            class="block md:hidden w-[90px] h-[60px] object-contain"
-            width={120}
-            height={80}
+            class="block md:hidden w-[75px] h-[50px] object-contain"
+            width={225}
+            height={150}
             loading="eager"
             format={["avif", "webp", "png"]}
             quality={100}
+            densities={[1, 2]}
           />
           <!-- Logo desktop: 319x87 -->
           <Picture
@@ -149,6 +154,17 @@ const isActive = (path: string) => Astro.url.pathname === path;
     </div>
   </nav>
 </header>
+
+<style>
+  /* Smooth anti-aliasing for logos */
+  .header-logo img {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    image-rendering: smooth;
+    image-rendering: high-quality;
+    image-rendering: -webkit-optimize-contrast;
+  }
+</style>
 
 <script is:inline>
   // Función para manejar el menú móvil - ejecutable en cada página
