@@ -2,7 +2,8 @@
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
 import { Picture } from "astro:assets";
-import logoMobile from "../../assets/img/logo/logo-mobile.png";
+// import logoMobile from "../../assets/img/logo/logo-mobile.png";
+import logoMobile from "../../assets/img/logo/logo-mobile-alt.png";
 import logoDesktop from "../../assets/img/logo/logo-desktop.png";
 
 // Titulos mobile
@@ -25,16 +26,16 @@ const isActive = (path: string) => Astro.url.pathname === path;
   <Container>
     <!-- Contenedor para centrar el título en mobile -->
     <div class="relative flex h-full w-full items-center justify-between">
-      <!-- IZQUIERDA: Logo (61x46 en mobile, 319x77 en desktop) -->
-      <div class="flex-shrink-0 w-auto pl-4">
+      <!-- IZQUIERDA: Logo (mejor proporción mobile, 319x77 en desktop) -->
+      <div class="flex-shrink-0 w-auto pl-4 pt-2 md:pt-0">
         <a href="/" class="block">
-          <!-- Logo mobile: 61x46 -->
+          <!-- Logo mobile: mejoramos proporción y tamaño -->
           <Picture
             src={logoMobile}
             alt="MG Consulting - Consultoría Estratégica"
-            class="block md:hidden w-[61px] h-[46px] object-fill"
-            width={61}
-            height={46}
+            class="block md:hidden w-[72px] h-[48px] object-contain"
+            width={72}
+            height={48}
             loading="eager"
             format={["avif", "webp", "png"]}
             quality={100}
@@ -54,10 +55,10 @@ const isActive = (path: string) => Astro.url.pathname === path;
       </div>
 
       <!-- CENTRO: Nav en desktop (364x22 aprox) / Título en mobile -->
-      <!-- Título mobile centrado absolutamente para que quede PERFECTO -->
+      <!-- Título mobile centrado pero con más espacio para logo más grande -->
       {
         mobileTitle && (
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-lg leading-none font-semibold text-[var(--color-blue)] truncate max-w-[60%] text-center">
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-base leading-none font-semibold text-[var(--color-blue)] truncate max-w-[45%] text-center">
             {mobileTitle}
           </div>
         )
@@ -89,7 +90,7 @@ const isActive = (path: string) => Astro.url.pathname === path;
       <button
         type="button"
         id="mobile-menu-button"
-        class="md:hidden inline-flex items-center justify-center w-10 h-10 transition-colors hover:bg-gray-100 rounded-lg"
+        class="md:hidden inline-flex items-center justify-center w-10 h-10 transition-colors hover:bg-gray-100 rounded-lg mr-2"
         aria-label="Abrir menú"
         aria-expanded="false"
       >
@@ -131,26 +132,27 @@ const isActive = (path: string) => Astro.url.pathname === path;
   >
     <div class="px-6 py-4 space-y-3">
       {
-        nav.map((item) => (
-          <a
-            href={item.href}
-            class={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors ${
-              isActive(item.href)
-                ? "bg-[var(--color-brand-blue)] text-white"
-                : "text-slate-700 hover:bg-gray-100 hover:text-[var(--color-brand-blue)]"
-            }`}
-          >
-            {item.label}
-          </a>
-        ))
+        nav.map((item) => {
+          if (isActive(item.href)) {
+            return null;
+          }
+          return (
+            <a
+              href={item.href}
+              class="block px-4 py-3 text-lg font-medium rounded-lg transition-colors text-slate-700 hover:bg-gray-100 hover:text-[var(--color-brand-blue)]"
+            >
+              {item.label}
+            </a>
+          );
+        })
       }
     </div>
   </nav>
 </header>
 
-<script>
-  // Función para manejar el menú móvil
-  document.addEventListener('DOMContentLoaded', function() {
+<script is:inline>
+  // Función para manejar el menú móvil - ejecutable en cada página
+  function initMobileMenu() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIcon = document.getElementById('hamburger-icon');
@@ -160,6 +162,12 @@ const isActive = (path: string) => Astro.url.pathname === path;
     if (!mobileMenuButton || !mobileMenu || !hamburgerIcon || !closeIcon) {
       return;
     }
+    
+    // Limpiar eventos anteriores si existen
+    if (mobileMenuButton._mobileMenuInitialized) {
+      return;
+    }
+    mobileMenuButton._mobileMenuInitialized = true;
     
     let isMenuOpen = false;
     
@@ -242,5 +250,8 @@ const isActive = (path: string) => Astro.url.pathname === path;
         closeMenu();
       }
     });
-  });
+  }
+  
+  // Inicializar en carga de página
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
 </script>
