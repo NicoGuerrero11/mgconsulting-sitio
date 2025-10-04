@@ -49,7 +49,11 @@ export default defineConfig({
   image: {
     // Configure built-in image service
     service: {
-      entrypoint: 'astro/assets/services/sharp'
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+        quality: 100
+      }
     },
     // Optimizaciones adicionales
     domains: ['localhost'],
