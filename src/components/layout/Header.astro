@@ -33,9 +33,9 @@ const isActive = (path: string) => Astro.url.pathname === path;
           <Picture
             src={logoMobile}
             alt="MG Consulting - Consultoría Estratégica"
-            class="block md:hidden w-[72px] h-[48px] object-contain"
-            width={72}
-            height={48}
+            class="block md:hidden w-[90px] h-[60px] object-contain"
+            width={120}
+            height={80}
             loading="eager"
             format={["avif", "webp", "png"]}
             quality={100}
@@ -58,7 +58,7 @@ const isActive = (path: string) => Astro.url.pathname === path;
       <!-- Título mobile centrado pero con más espacio para logo más grande -->
       {
         mobileTitle && (
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-base leading-none font-semibold text-[var(--color-blue)] truncate max-w-[45%] text-center">
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:hidden text-sm leading-none font-semibold text-[var(--color-blue)] truncate max-w-[40%] text-center">
             {mobileTitle}
           </div>
         )
