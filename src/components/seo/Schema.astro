@@ -1,0 +1,135 @@
+---
+export interface Props {
+  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'Article' | 'Service';
+  data?: Record<string, any>;
+}
+
+const { type, data = {} } = Astro.props;
+
+// Schema base para la organización
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MG Consulting",
+  "alternateName": "Managing & Growth Consulting",
+  "url": "https://mgconsultings.com",
+  "logo": "https://mgconsultings.com/logo-schema.png",
+  "description": "Consultoría estratégica especializada en crecimiento empresarial, liderazgo ejecutivo y transformación organizacional.",
+  "sameAs": [
+    "https://www.linkedin.com/company/mg-consulting",
+    "https://www.facebook.com/mgconsulting"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+52-55-3996-5275",
+    "contactType": "customer service",
+    "email": "marcelo@mgconsultings.com",
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "MX",
+    "addressLocality": "México"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Marcelo Guerrero",
+    "jobTitle": "Consultor Senior en Crecimiento Empresarial"
+  },
+  "knowsAbout": [
+    "Consultoría Empresarial",
+    "Liderazgo Ejecutivo", 
+    "Crecimiento Empresarial",
+    "Transformación Organizacional",
+    "Gestión del Cambio",
+    "Estrategia de Negocios"
+  ]
+};
+
+// Schema para sitio web
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "MG Consulting",
+  "url": "https://mgconsultings.com",
+  "description": "Consultoría estratégica para el crecimiento empresarial",
+  "publisher": {
+    "@type": "Organization",
+    "name": "MG Consulting"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://mgconsultings.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Schema para servicios
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Consultoría Estratégica Empresarial",
+  "provider": {
+    "@type": "Organization",
+    "name": "MG Consulting"
+  },
+  "description": "Servicios especializados de consultoría empresarial para el crecimiento y transformación organizacional",
+  "serviceType": "Business Consulting",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Mexico"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Consultoría",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Desarrollo de Liderazgo Ejecutivo"
+        }
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Estrategias de Crecimiento Empresarial"
+        }
+      }
+    ]
+  }
+};
+
+// Seleccionar schema según el tipo
+let schema;
+switch(type) {
+  case 'Organization':
+    schema = { ...organizationSchema, ...data };
+    break;
+  case 'WebSite':
+    schema = { ...websiteSchema, ...data };
+    break;
+  case 'Service':
+    schema = { ...serviceSchema, ...data };
+    break;
+  case 'Article':
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "publisher": {
+        "@type": "Organization", 
+        "name": "MG Consulting"
+      },
+      ...data
+    };
+    break;
+  default:
+    schema = { ...organizationSchema, ...data };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

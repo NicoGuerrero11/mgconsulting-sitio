@@ -3,6 +3,7 @@ import Layout from "../layouts/BaseLayout.astro";
 import Container from "../components/ui/Container.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import ServiceCard from "../components/services/ServiceCard.astro";
+import Schema from "../components/seo/Schema.astro";
 
 const services = (await getCollection("services"))
   .filter((s) => !s.data.draft)
@@ -18,7 +19,14 @@ const servicesWithContent = await Promise.all(
 );
 ---
 
-<Layout title="Servicios - MG Consulting" mobileTitle="Nuestros Servicios">
+<Layout 
+  title="Servicios de Consultoría Empresarial | Liderazgo y Crecimiento - MG Consulting"
+  description="Servicios especializados de consultoría empresarial: desarrollo de liderazgo ejecutivo, estrategias de crecimiento, transformación organizacional y gestión del cambio. Contáctanos."
+  mobileTitle="Nuestros Servicios"
+  image="/og-servicios.jpg"
+>
+  <!-- Schema markup para servicios -->
+  <Schema slot="head" type="Service" />
   <Container class="w-full px-6 md:px-8">
     <div class="space-y-20 md:spate-y-0">
       <div class="text-center">

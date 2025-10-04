@@ -1,6 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
 import Button from "../ui/Button.astro";
+import { Picture } from "astro:assets";
 import logoMobile from "../../assets/img/logo/logo-mobile.png";
 import logoDesktop from "../../assets/img/logo/logo-desktop.png";
 
@@ -13,6 +14,7 @@ const nav = [
   { href: "/servicios", label: "Servicios" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/blog", label: "Blog" },
+  { href: "/contacto", label: "Contacto" },
 ];
 const isActive = (path: string) => Astro.url.pathname === path;
 ---
@@ -27,20 +29,26 @@ const isActive = (path: string) => Astro.url.pathname === path;
       <div class="flex-shrink-0 w-auto pl-4">
         <a href="/" class="block">
           <!-- Logo mobile: 61x46 -->
-          <img
-            src={logoMobile.src}
-            alt="MG Consulting"
+          <Picture
+            src={logoMobile}
+            alt="MG Consulting - Consultoría Estratégica"
             class="block md:hidden w-[61px] h-[46px] object-fill"
-            width="61"
-            height="46"
+            width={61}
+            height={46}
+            loading="eager"
+            format={["avif", "webp", "png"]}
+            quality={100}
           />
-          <!-- Logo desktop: 400x87 -->
-          <img
-            src={logoDesktop.src}
-            alt="MG Consulting"
+          <!-- Logo desktop: 319x87 -->
+          <Picture
+            src={logoDesktop}
+            alt="MG Consulting - Consultoría Estratégica para el Crecimiento Empresarial"
             class="hidden md:block w-[319px] h-[87px] object-cover"
-            width="319"
-            height="87"
+            width={319}
+            height={87}
+            loading="eager"
+            format={["avif", "webp", "png"]}
+            quality={100}
           />
         </a>
       </div>
@@ -77,23 +85,162 @@ const isActive = (path: string) => Astro.url.pathname === path;
         <Button href="/contacto" label="Contacto" />
       </div>
 
+      <!-- Botón hamburguesa -->
       <button
-        class="md:hidden inline-flex items-center justify-center w-10 h-10"
+        type="button"
+        id="mobile-menu-button"
+        class="md:hidden inline-flex items-center justify-center w-10 h-10 transition-colors hover:bg-gray-100 rounded-lg"
         aria-label="Abrir menú"
+        aria-expanded="false"
       >
-        <!-- Ícono hamburguesa (24x24 dentro del botón 40x40) -->
+        <!-- Ícono hamburguesa -->
         <svg
+          id="hamburger-icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          class="w-6 h-6 text-[var(--color-brand-blue)]"
+          class="w-6 h-6 text-[var(--color-brand-blue)] transition-transform duration-200"
         >
           <path
             fill-rule="evenodd"
             d="M3.75 6.75A.75.75 0 014.5 6h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75zm0 5.25a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
             clip-rule="evenodd"></path>
         </svg>
+        <!-- Ícono X (cerrar) -->
+        <svg
+          id="close-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-[var(--color-brand-blue)] absolute opacity-0 transition-all duration-200"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+            clip-rule="evenodd"></path>
+        </svg>
       </button>
     </div>
   </Container>
+  
+  <!-- Menú móvil desplegable -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden bg-white shadow-lg transform -translate-y-full opacity-0 transition-all duration-300 ease-in-out absolute top-full left-0 right-0 z-40 pointer-events-none"
+    hidden
+  >
+    <div class="px-6 py-4 space-y-3">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class={`block px-4 py-3 text-lg font-medium rounded-lg transition-colors ${
+              isActive(item.href)
+                ? "bg-[var(--color-brand-blue)] text-white"
+                : "text-slate-700 hover:bg-gray-100 hover:text-[var(--color-brand-blue)]"
+            }`}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
 </header>
+
+<script>
+  // Función para manejar el menú móvil
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    // Verificar que todos los elementos existan
+    if (!mobileMenuButton || !mobileMenu || !hamburgerIcon || !closeIcon) {
+      return;
+    }
+    
+    let isMenuOpen = false;
+    
+    // Función para abrir el menú
+    function openMenu() {
+      isMenuOpen = true;
+      mobileMenu.hidden = false;
+      mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      mobileMenu.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      
+      // Cambiar iconos
+      hamburgerIcon.classList.add('opacity-0', 'rotate-90');
+      closeIcon.classList.remove('opacity-0');
+      closeIcon.classList.add('opacity-100');
+      
+      mobileMenuButton.setAttribute('aria-expanded', 'true');
+      mobileMenuButton.setAttribute('aria-label', 'Cerrar menú');
+    }
+    
+    // Función para cerrar el menú
+    function closeMenu() {
+      isMenuOpen = false;
+      mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      mobileMenu.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      
+      // Esperar a que termine la animación antes de ocultar completamente
+      setTimeout(() => {
+        if (!isMenuOpen) {
+          mobileMenu.hidden = true;
+        }
+      }, 300);
+      
+      // Cambiar iconos
+      hamburgerIcon.classList.remove('opacity-0', 'rotate-90');
+      closeIcon.classList.add('opacity-0');
+      closeIcon.classList.remove('opacity-100');
+      
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.setAttribute('aria-label', 'Abrir menú');
+    }
+    
+    // Event listener para el botón
+    mobileMenuButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    
+    // Cerrar el menú cuando se hace clic en un enlace
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+    
+    // Cerrar el menú cuando se hace clic fuera de él
+    document.addEventListener('click', function(event) {
+      if (isMenuOpen && 
+          !mobileMenu.contains(event.target) && 
+          !mobileMenuButton.contains(event.target) &&
+          !event.target.closest('#mobile-menu-button')) {
+        closeMenu();
+      }
+    });
+    
+    // Cerrar el menú con la tecla Escape
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    });
+    
+    // Cerrar el menú cuando se cambie a desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 768 && isMenuOpen) {
+        closeMenu();
+      }
+    });
+  });
+</script>

@@ -1,97 +1,255 @@
-# MG Sitio — Company Website
+# MG Sitio — Sitio Web Corporativo de Consultoría
 
-## 1. Project Overview
+## 📋 Descripción del Proyecto
 
-This project is a company website built with [Astro](https://astro.build/) and [TailwindCSS](https://tailwindcss.com/) (v4.1). It features a modern, responsive design and a component-driven architecture for maintainability and scalability.
+Sitio web corporativo para **MG Consulting**, una empresa de consultoría estratégica empresarial. Desarrollado con [Astro](https://astro.build/) v5.13.7, [TailwindCSS](https://tailwindcss.com/) v4.1, y optimizado para SEO y rendimiento.
 
-## 2. Project Structure
-
-The main structure of the project is as follows:
+## 🏗️ Arquitectura y Estructura
 
 ```text
 src/
 ├── assets/
 ├── components/
-│   ├── ui/
-│   │   ├── Button.astro
-│   │   ├── Container.astro
-│   │   └── SectionTitle.astro
-│   ├── layout/
+│   ├── about/          # Componentes de "Nosotros"
+│   │   ├── About.astro
+│   │   ├── Fundador.astro
+│   │   ├── FounderCard.astro
+│   │   ├── Mision.astro
+│   │   ├── Value.astro
+│   │   └── ValueCard.astro
+│   ├── blog/           # Componentes del Blog
+│   │   ├── Pagination.astro
+│   │   ├── PostCard.astro
+│   │   ├── PostMeta.astro
+│   │   └── Prose.astro
+│   ├── contact/        # Componentes de Contacto
+│   │   ├── ContactDetails.astro
+│   │   ├── ContactForm.astro
+│   │   └── ContactIntro.astro
+│   ├── home/           # Componentes del Homepage
+│   │   ├── CardService.astro
+│   │   ├── Hero.astro
+│   │   ├── Nosotros.astro
+│   │   ├── Services.astro
+│   │   ├── Testimonial.astro
+│   │   └── TestimonialCard.astro
+│   ├── layout/         # Layout Components
 │   │   ├── Header.astro
 │   │   └── Footer.astro
-│   ├── home/
-│   │   └── Hero.astro
+│   ├── seo/            # SEO Components
+│   │   └── Schema.astro
+│   ├── services/       # Componentes de Servicios
+│   │   └── ServiceCard.astro
+│   └── ui/             # UI Components Reutilizables
+│       ├── Button.astro
+│       ├── Container.astro
+│       └── SectionTitle.astro
+├── content/            # Contenido en Markdown
+│   ├── blog/
+│   │   └── primer-nota.md
+│   ├── services/
+│   │   ├── business-growth.md
+│   │   └── executive-leadership.md
+│   └── values/         # Valores de la empresa
+│       ├── colaboracion.md
+│       ├── compromiso.md
+│       ├── excelencia.md
+│       ├── inovacion.md
+│       ├── integridad.md
+│       └── resultados.md
+├── data/               # Datos estáticos
+│   ├── nav.ts
+│   └── social.ts
 ├── layouts/
 │   └── BaseLayout.astro
-├── pages/
-│   ├── index.astro
-│   ├── servicios.astro
-│   ├── nosotros.astro
+├── pages/              # Rutas del sitio
+│   ├── api/
+│   │   └── contact.ts  # API endpoint para formulario
 │   ├── blog/
 │   │   └── index.astro
-│   └── contacto.astro
-├── data/
-├── lib/
-├── types/
-├── content/
-├── styles/
-│   └── global.css
+│   ├── contacto.astro
+│   ├── gracias.astro
+│   ├── index.astro
+│   ├── nosotros.astro
+│   └── servicios.astro
+├── scripts/
+│   └── testimonial-carousel.ts
+└── styles/
+    └── global.css
 ```
 
-**Key Components:**
-- `ui/`: `Button`, `Container`, `SectionTitle`
-- `layout/`: `Header`, `Footer`
-- `home/`: `Hero`
-- Layout: `BaseLayout`
-- Pages: `servicios`, `nosotros`, `blog/index`, `contacto`
+### 🎯 Componentes Principales
 
-**Other folders:**
-- `data/`: For static data used throughout the site (e.g., JSON or JS data files).
-- `lib/`: Utility functions and shared logic.
-- `types/`: TypeScript type definitions.
-- `content/`: Markdown or other content files for blog posts or static pages.
+#### **Layout & Navigation**
+- **Header**: Navegación responsive con logo, menú y CTA
+- **Footer**: Enlaces, redes sociales y información de contacto
+- **BaseLayout**: Layout base con SEO, Schema.org y metadatos
 
-## 3. Styling
+#### **Homepage**
+- **Hero**: Sección principal con video/imagen de fondo y CTAs
+- **Services**: Grid de servicios con cards interactivas
+- **Testimonial**: Carrusel responsive de testimonios
+- **Nosotros**: Sección sobre la empresa
 
-Styling is handled with **TailwindCSS v4.1**. The main theme is configured in `src/styles/global.css`, including:
-- Custom typography
-- Color palette
-- Responsive breakpoints
+#### **Páginas Especializadas**
+- **Servicios**: Catálogo completo de servicios
+- **Nosotros**: Historia, misión, valores y fundador
+- **Contacto**: Formulario funcional + información de contacto
+- **Blog**: Sistema de contenido con Astro Content Collections
 
-All components utilize Tailwind utility classes for rapid and consistent styling.
+## 🎨 Tecnologías y Stack
 
-## 4. Development Workflow
+### **Frontend**
+- **Astro** v5.13.7 - Framework principal con SSR
+- **TailwindCSS** v4.1 - Estilos utilitarios
+- **TypeScript** - Tipado estático
+- **React** v19.1.1 - Para componentes interactivos específicos
 
-We use a branching strategy to ensure stable deployments:
-- **dev** branch: All development work is done here.
-- **main** branch: Production branch. Only updated by merging PRs from `dev`.
+### **Backend & APIs**
+- **Vercel** - Deployment y hosting
+- **Resend** - Servicio de email para formularios
+- **Zod** - Validación de datos
 
-Please open pull requests from feature branches into `dev`. Once changes are reviewed and tested, merge `dev` into `main` for production deployment.
+### **SEO & Performance**
+- **Sitemap automático** - Generación dinámica
+- **Schema.org** - Structured data para SEO
+- **Open Graph** - Meta tags para redes sociales
+- **Optimización de imágenes** - Sharp para compresión
 
-## 5. Implemented Features
+### **Content Management**
+- **Astro Content Collections** - Sistema de contenido
+- **Markdown** - Para blog y servicios
+- **Frontmatter** - Metadatos estructurados
 
-- **Header**: Responsive, includes company logo, navigation links, and a prominent CTA button.
-- **Footer**: Responsive, with logo, navigation links, social media links, and copyright.
-- **Global Container**: Ensures consistent layout and padding across all sections.
-- **Hero Section**: Features a background, strong heading, supporting image, and two CTA buttons.
-- **CardService Component**: Displays service offerings in a modular card format.
-- **TestimonialCard Component**: Responsive carousel—shows a single card on mobile, multiple cards on larger screens.
+## ⚡ Características Implementadas
 
-## 6. Commands
+### **🎯 SEO Avanzado**
+- Meta tags dinámicos por página
+- Open Graph optimizado para redes sociales
+- Schema.org con datos estructurados
+- Sitemap XML automático
+- Robots.txt configurado
 
-All commands are run from the root of the project in your terminal:
+### **📱 Responsive Design**
+- Mobile-first approach
+- Breakpoints personalizados (hasta 2xl: 1440px)
+- Container responsive con padding adaptativo
+- Componentes optimizados para todos los tamaños
 
-| Command                   | Description                                       |
-| :------------------------ | :------------------------------------------------ |
-| `npm install`             | Install dependencies                              |
-| `npm run dev`             | Start local dev server at `localhost:4321`        |
-| `npm run build`           | Build your production site to `./dist/`           |
-| `npm run preview`         | Preview your build locally before deploying       |
-| `npm run astro ...`       | Run Astro CLI commands, e.g. `astro check`        |
-| `npm run astro -- --help` | Get help using the Astro CLI                      |
+### **🔧 Componentes Modulares**
+- **Header**: Navegación sticky con menú hamburguesa móvil
+- **Footer**: Enlaces organizados y redes sociales
+- **Hero**: Sección principal con CTA doble
+- **ServiceCard**: Cards hover con efectos
+- **TestimonialCard**: Carrusel JavaScript vanilla
+- **ContactForm**: Formulario funcional con validación
 
-## 7. Next Steps
+### **📧 Sistema de Contacto**
+- API endpoint en `/api/contact.ts`
+- Integración con Resend para envío de emails
+- Validación con Zod
+- Página de confirmación `/gracias`
+- Manejo de errores robusto
 
-- **Content Integration**: Add final copy, SEO metadata, and optimized images.
-- **Final Polish**: Review responsiveness, accessibility, and browser compatibility.
-- **Deployment**: Deploy to production from the `main` branch.
+### **📝 Content Management**
+- Blog con sistema de posts en Markdown
+- Servicios como Content Collections
+- Valores de empresa en archivos separados
+- Metadata automática (fechas, autores, etc.)
+
+### **🎨 Design System**
+- Tipografía Montserrat
+- Paleta de colores corporativa:
+  - Primary: `#003B75` (azul corporativo)
+  - Accent: `#10B981` (verde)
+  - Neutrals: grises personalizados
+- Componentes UI reutilizables
+- Padding especial para desktop (111px)
+
+## 🔄 Flujo de Desarrollo
+
+### **Branching Strategy**
+- **`dev`**: Branch de desarrollo principal
+- **`main`**: Branch de producción
+- **Feature branches**: Para nuevas características
+
+### **Deployment**
+- Integración continua con Vercel
+- Auto-deploy desde `main`
+- Preview deployments desde PRs
+- Variables de entorno para APIs
+
+## 🛠️ Comandos de Desarrollo
+
+Todos los comandos se ejecutan desde la raíz del proyecto:
+
+| Comando                      | Descripción                                        |
+| :--------------------------- | :------------------------------------------------- |
+| `npm install`                | Instalar dependencias                              |
+| `npm run dev`                | Servidor de desarrollo en `localhost:4321`         |
+| `npm run build`              | Build para producción en `./dist/`                |
+| `npm run preview`            | Preview del build local                            |
+| `npm run sitemap`            | Generar sitemap en modo estático                  |
+| `npm run sitemap:prod`       | Generar sitemap para producción                   |
+| `npm run astro ...`          | Comandos del CLI de Astro                          |
+| `npm run astro -- --help`    | Ayuda del CLI de Astro                             |
+
+## 📁 Variables de Entorno
+
+Crea un archivo `.env` basado en `.env.example`:
+
+```env
+# Resend API para formularios
+RESEND_API_KEY=tu_api_key_de_resend
+
+# URL del sitio para SEO
+PUBLIC_SITE_URL=https://tudominio.com
+```
+
+## 📚 Contenido y SEO
+
+### **Content Collections**
+El contenido está organizado en colecciones:
+- `src/content/blog/` - Posts del blog
+- `src/content/services/` - Servicios de la empresa
+- `src/content/values/` - Valores corporativos
+
+### **SEO Implementado**
+- Meta tags dinámicos
+- Open Graph para redes sociales
+- Schema.org structured data
+- Sitemap XML automático
+- Optimización de imágenes
+
+### **Imágenes Sociales**
+Para optimizar el SEO social, agrega estas imágenes en `/public/`:
+- `og-image.jpg` (1200x630px) - Imagen por defecto
+- `og-home.jpg` - Para homepage
+- `og-servicios.jpg` - Para servicios
+- `og-contacto.jpg` - Para contacto
+- `og-nosotros.jpg` - Para nosotros
+- `og-blog.jpg` - Para blog
+
+## 🚀 Próximos Pasos
+
+### **Contenido**
+- [ ] Finalizar textos y copys
+- [ ] Añadir imágenes optimizadas
+- [ ] Completar posts del blog
+- [ ] Revisar metadatos SEO
+
+### **Optimización**
+- [ ] Auditoría de performance
+- [ ] Pruebas de accesibilidad
+- [ ] Compatibilidad cross-browser
+- [ ] Validación W3C
+
+### **Analytics & Monitoring**
+- [ ] Google Analytics
+- [ ] Google Search Console
+- [ ] Monitoreo de uptime
+- [ ] Performance metrics
+
+---
+
+**Desarrollado con ❤️ para MG Consulting**

@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Excluir páginas que no queremos indexar
+Disallow: /gracias
+Disallow: /admin/
+Disallow: /_astro/
+
+# Sitemap location
+Sitemap: https://mgconsultings.com/sitemap-index.xml
+Sitemap: https://mgconsultings.com/sitemap-0.xml
+
+# Crawl-delay para ser amigable con los bots
+Crawl-delay: 1
