@@ -248,60 +248,51 @@ Para optimizar el SEO social, agrega estas imágenes en `/public/`:
 
 ## 🚀 Próximas Tareas para Proyecto Finalizado
 
-### **🌐 Conexión de Dominio (Alta Prioridad)**
+### **🌐 Conexión de Dominio **
 - [ ] **Configurar DNS** - Apuntar mgconsulting.com a Vercel
   - [ ] Registro A: `@` → `76.76.19.61`
   - [ ] CNAME: `www` → `cname.vercel-dns.com`
 - [ ] **SSL automático** - Verificar certificado en Vercel
 - [ ] **Probar dominio** - Verificar que mgconsulting.com funcione
 
-### **📝 Contenido & Copy (Media Prioridad)**
+### **📝 Contenido & Copy **
 - [ ] **Revisar textos** - Pulir copys de todas las páginas
 - [ ] **Completar blog** - Añadir más posts relevantes
 - [ ] **Testimonios reales** - Reemplazar testimonios de prueba
 - [ ] **Metadatos SEO** - Revisar titles y descriptions
 - [ ] **Imágenes del equipo** - Fotos profesionales para "Nosotros"
 
-### **🎨 Ajustes Visuales (Baja Prioridad)**
+### **🎨 Ajustes Visuales **
 - [ ] **Favicon personalizado** - Reemplazar favicon por defecto
 - [ ] **Animaciones sutiles** - Micro-interacciones en CTAs
 - [ ] **Dark mode** (opcional) - Tema oscuro
 - [ ] **Loader personalizado** - Pantalla de carga con logo
 
-### **📈 Analytics & Tracking (Media Prioridad)**
+### **📈 Analytics & Tracking **
 - [ ] **Google Analytics 4** - Configurar tracking
 - [ ] **Google Search Console** - Verificar propiedad del sitio
 - [ ] **Facebook Pixel** (opcional) - Para remarketing
 - [ ] **Hotjar** (opcional) - Mapas de calor y grabaciones
 
-### **🔧 Optimización Final (Baja Prioridad)**
+### **🔧 Optimización Final **
 - [ ] **Performance audit** - Google Lighthouse > 90
 - [ ] **Accesibilidad** - WCAG 2.1 AA compliance
 - [ ] **Cross-browser testing** - Safari, Firefox, Chrome, Edge
 - [ ] **Mobile testing** - iOS Safari, Chrome Mobile
 
-### **📧 Funcionalidades Adicionales (Opcional)**
+### **📧 Funcionalidades Adicionales **
 - [ ] **Newsletter signup** - Formulario de suscripción
 - [ ] **WhatsApp integration** - Botón flotante de contacto
 - [ ] **Blog comments** - Sistema de comentarios
 - [ ] **Calculadora de ROI** - Tool interactivo para leads
 
-### **🛡️ Seguridad & Backup (Baja Prioridad)**
+### **🛡️ Seguridad & Backup **
 - [ ] **Backup automático** - GitHub como respaldo
 - [ ] **Monitoring uptime** - Alertas de caída del sitio
 - [ ] **CDN configuration** - Optimización de velocidad global
 - [ ] **Security headers** - Configuración en Vercel
 
-## 🎯 Para Lanzamiento Inmediato
 
-**Mínimo Viable (Listo para producción):**
-1. ✅ Sitio funcional y responsive
-2. ✅ Formulario de contacto operativo  
-3. ✅ SEO básico implementado
-4. 🔄 **Conectar dominio personalizado** ← **URGENTE**
-5. 🔄 **Revisar textos finales** ← **IMPORTANTE**
-
-**El sitio está 95% listo.** Solo falta conectar el dominio y hacer ajustes menores de contenido.
 
 ---
 
